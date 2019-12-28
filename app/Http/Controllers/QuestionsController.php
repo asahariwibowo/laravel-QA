@@ -47,7 +47,7 @@ class QuestionsController extends Controller
      * @param  \App\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function show(Questions $questions)
+    public function show(Question $questions)
     {
         //
     }
@@ -58,7 +58,7 @@ class QuestionsController extends Controller
      * @param  \App\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questions $questions)
+    public function edit(Question $questions)
     {
         //
     }
@@ -70,7 +70,7 @@ class QuestionsController extends Controller
      * @param  \App\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Questions $questions)
+    public function update(Request $request, Question $questions)
     {
         //
     }
@@ -81,7 +81,7 @@ class QuestionsController extends Controller
      * @param  \App\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Questions $questions)
+    public function destroy(Question $questions)
     {
         //
     }
