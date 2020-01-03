@@ -19,7 +19,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {   
-        $questions = Question::with('user')->latest()->paginate(5);
+        $questions = Question::with('user')->latest()->paginate(10);
 
         return view('questions.index', compact('questions'));
 
@@ -55,7 +55,7 @@ class QuestionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Questions  $questions
+     * @param  \App\Questions  $question
      * @return \Illuminate\Http\Response
      */
     public function show(Question $question)

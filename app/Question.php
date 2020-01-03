@@ -8,17 +8,16 @@ class Question extends Model
 {
     protected $fillable = ['title', 'body'];
     
-    public function user(){
+    public function user() {
         return $this->belongsTo(User::class);
-
-    }
+    }   
 
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = str_slug($value);
     }
-  
+
     public function getUrlAttribute()
     {
         return route("questions.show", $this->slug);
@@ -32,7 +31,7 @@ class Question extends Model
     public function getStatusAttribute()
     {
         if ($this->answers_count > 0) {
-            if ($this->best_answer_id){
+            if ($this->best_answer_id) {
                 return "answered-accepted";
             }
             return "answered";
@@ -44,8 +43,10 @@ class Question extends Model
     {
         return \Parsedown::instance()->text($this->body);
     }
-
-    public function answers(){
-        return $this->hasMany(answer::class);
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+        // $question->answers->count()
+        // foreach ($question->answers as $answer)
     }
 }
