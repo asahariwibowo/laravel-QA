@@ -7,15 +7,10 @@ use App\Question;
 use Illuminate\Http\Request;
 
 class AnswersController extends Controller
-{
-    
+{    
+
     /**
-     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
-     */
-   
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -27,10 +22,8 @@ class AnswersController extends Controller
         $question->answers()->create($request->validate([
             'body' => 'required'
         ]) + ['user_id' => \Auth::id()]);
-
-        return back()->with('succes', "Your answer has been submitted successfuly");
-    }
-
+        return back()->with('success', "Your answer has been submitted successfully");
+    }    
 
     /**
      * Show the form for editing the specified resource.
@@ -38,9 +31,10 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
+    public function edit(Question $question, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
+        return view('answers.edit', compact('question', 'answer'));
     }
 
     /**
@@ -50,9 +44,13 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, Question $question, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
+        $answer->update($request->validate([
+            'body' => 'required',
+        ]));
+        return redirect()->route('questions.show', $question->slug)->with('success', 'Your answer has been updated');
     }
 
     /**
